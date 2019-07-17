@@ -1,6 +1,7 @@
 package ru.job4j.example;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class User {
 
@@ -32,6 +33,21 @@ public class User {
 
     public void setExpired(Timestamp expired) {
         this.expired = expired;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                name.equals(user.name) &&
+                expired.equals(user.expired);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, expired);
     }
 
     @Override
