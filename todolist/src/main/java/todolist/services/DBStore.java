@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import todolist.models.Item;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.BiFunction;
 
 public class DBStore implements Store{
 
@@ -25,51 +26,43 @@ public class DBStore implements Store{
     }
 
     public void create(Item item) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-
-        session.save(item);
-
-        session.getTransaction().commit();
-        session.close();
+        wrap(Session::save, item);
     }
 
     public List<Item> findAll() {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        List<Item> items = session.createQuery("from Item").list();
-        List<Item> list = new CopyOnWriteArrayList<Item>(items);
-        session.getTransaction().commit();
-        session.close();
-        return list;
+        return wrap((session, arg) -> {
+            List<Item> items = session.createQuery("from Item").list();
+            return (List<Item>) new CopyOnWriteArrayList<Item>(items);
+        }, null);
     }
 
     public Item findById(int id) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        Item item = (Item) session.createQuery("from items").list().get(0);
-        session.getTransaction().commit();
-        session.close();
-        return item;
+        return wrap((session, arg) -> (Item) session.createQuery("from items").list().get(0), id);
     }
 
     public void update(Item item) {
-        Session session = factory.openSession();
-        session.beginTransaction();
-        Item updated = session.get(Item.class, item.getId());
-        updated.setDone(item.getDone());
-        session.update(updated);
-        session.getTransaction().commit();
-        session.close();
+        wrap((session, arg) -> {
+            Item updated = session.get(Item.class, item.getId());
+            updated.setDone(arg.getDone());
+            session.update(arg);
+            return null;
+        }, item);
     }
 
     public void delete(Item item) {
+        wrap((session, arg) -> {
+            session.delete(arg);
+            return null;
+        }, item);
+    }
+
+    private  <T, R> R wrap(BiFunction<Session, T, R> function, T arg) {
         Session session = factory.openSession();
         session.beginTransaction();
-
-        session.delete(item);
-
+        R data = function.apply(session, arg);
         session.getTransaction().commit();
         session.close();
+        return data;
     }
+
 }
