@@ -1,0 +1,8 @@
+<hibernate-mapping>
+    <class name="todolist.models.Item" table="items">
+        <id name="id" column="id"/>
+        <property name="description" column="description"/>
+        <property name="creatingTime" column="creating_time"/>
+        <property name="done" column="done"/>
+    </class>
+</hibernate-mapping>
