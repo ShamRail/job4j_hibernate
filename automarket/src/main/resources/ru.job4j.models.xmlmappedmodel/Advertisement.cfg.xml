@@ -1,0 +1,17 @@
+<hibernate-mapping>
+    <class name="ru.job4j.models.xmlmappedmodels.Advertisement" table="ads">
+        <!--Attributes-->
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="title" column="title"/>
+        <property name="description" column="description"/>
+        <property name="date" column="date"/>
+        <property name="status" column="status"/>
+        <!--Relationships-->
+        <one-to-one name="car" class="ru.job4j.models.xmlmappedmodels.Car"/>
+        <many-to-one name="user" class="ru.job4j.models.xmlmappedmodels.User">
+            <column name="user_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

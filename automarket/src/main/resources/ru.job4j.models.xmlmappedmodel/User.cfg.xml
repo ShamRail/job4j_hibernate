@@ -1,0 +1,22 @@
+<hibernate-mapping>
+    <class name="ru.job4j.models.xmlmappedmodels.User" table="users">
+        <!--Attributes-->
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="email" column="email"/>
+        <property name="telNumber" column="telNumber"/>
+        <property name="photoPath" column="photoPath"/>
+        <!--Relationships-->
+        <many-to-one name="role" class="ru.job4j.models.xmlmappedmodels.Role">
+            <column name="role_id"/>
+        </many-to-one>
+        <set name="ads" table="ads">
+            <key>
+                <column name="user_id"/>
+            </key>
+            <one-to-many class="ru.job4j.models.xmlmappedmodels.Advertisement"/>
+        </set>
+    </class>
+</hibernate-mapping>
