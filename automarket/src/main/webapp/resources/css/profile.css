@@ -1,0 +1,187 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-size: 20px;
+
+
+}
+
+body, html {
+    height: 100%;
+}
+
+header, footer {
+    width: 100%;
+    height: 50px;
+    background-color: #32A3CB;
+    flex-shrink: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.sidebar {
+    flex-basis: 25%;
+}
+
+.content {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+#img-box {
+    flex-basis: 25%;
+    height: 250px;
+    margin-right: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+}
+
+#user-info {
+    flex-basis: 75%;
+}
+
+#user-info form {
+    display: flex;
+    flex-direction: column;
+}
+
+#create-form {
+    width: 100%;
+
+    display: flex;
+    margin-top: 20px;
+}
+
+.btns {
+    margin-top: 10px;
+    display: flex;
+}
+
+#btn-cncl, #btn-sbmt {
+    flex: 1;
+}
+
+#list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.item {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+
+    border-color: black;
+    border-style: solid;
+    border-width: thin;
+}
+
+.item:hover {
+    border-color: red;
+    border-style: solid;
+
+}
+
+.img-box {
+    background-color: black;
+    width: 25%;
+    height: 180px;
+
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width: thin;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+}
+
+.dv-name, .dv-status, .dv-description {
+    text-align: center;
+}
+
+.dv-status {
+    color: green;
+
+    flex-grow: 1;
+
+    border-top-color: black;
+    border-top-style: solid;
+    border-top-width: thin;
+}
+
+.field {
+    display: flex;
+
+    border-top-color: black;
+    border-top-style: solid;
+    border-top-width: thin;
+}
+
+.inf-key, .inf-value {
+    flex-basis: 50%;
+}
+
+.inf-key {
+    border-right-color: black;
+    border-right-style: solid;
+    border-right-width: thin;
+}
+
+header {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+button {
+    background-color: white;
+    border-color: white;
+    height: 100%;
+    flex-basis: 50%;
+}
+
+#signin-btn, #signup-btn {
+    background-color: #32A3CB;
+    border: none;
+    box-shadow: none;
+    color: white;
+}
+
+#signin-btn:hover, #signup-btn:hover {
+    background-color: #2E97BD;
+}
+
+
+
+#aouth-btns {
+    padding: 0px;
+    width: 25%;
+    display: flex;
+    color: white;
+}
+
+form {
+    margin-left: 5px;
+    margin-right: 5px;
+}

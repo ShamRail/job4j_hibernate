@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <!--BEGIN: Servlets for user-->
+
+    <servlet>
+        <servlet-name>SigninServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.user.SigninServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SigninServlet</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignupServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.user.SignupServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignupServlet</servlet-name>
+        <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SignoutServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.user.SignoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignoutServlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowUserServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.user.ShowUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowUserServlet</servlet-name>
+        <url-pattern>/show-user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.user.EditUserServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/edit-user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RemoveUserServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.user.RemoveUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveUserServlet</servlet-name>
+        <url-pattern>/remove-user</url-pattern>
+    </servlet-mapping>
+
+    <!--END: Servlets for user-->
+
+    <!--BEGIN: Servlets for advertisements-->
+
+    <servlet>
+        <servlet-name>ShowAdsServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.advertisement.ShowAdsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowAdsServlet</servlet-name>
+        <url-pattern>/ads</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddAdServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.advertisement.AddAdServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddAdServlet</servlet-name>
+        <url-pattern>/add-ad</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditAdServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.advertisement.EditAdServlet</servlet-class>
+        <multipart-config>
+            <max-file-size>20848820</max-file-size>
+            <max-request-size>418018841</max-request-size>
+            <file-size-threshold>1048576</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditAdServlet</servlet-name>
+        <url-pattern>/edit-ad</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReadAdServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.advertisement.ReadAdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReadAdServlet</servlet-name>
+        <url-pattern>/get-ad</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RemoveAdServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.advertisement.RemoveAdServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveAdServlet</servlet-name>
+        <url-pattern>/remove-ad</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FilterServlet</servlet-name>
+        <servlet-class>ru.job4j.controllers.advertisement.FilterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FilterServlet</servlet-name>
+        <url-pattern>/filter</url-pattern>
+    </servlet-mapping>
+
+    <!--END: Servlets for advertisements-->
+
+    <servlet>
+        <servlet-name>GetImage</servlet-name>
+        <servlet-class>ru.job4j.controllers.GetImageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetImage</servlet-name>
+        <url-pattern>/get-image</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>ru.job4j.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/signin</url-pattern>
+    </filter-mapping>
+
+</web-app>
