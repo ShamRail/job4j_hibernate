@@ -36,10 +36,6 @@ public class RequestParser implements QueryParser<HttpServletRequest> {
         }
 
         if (sort != null) {
-            if (!pastedWhere) {
-                sb.append(" where ");
-                pastedWhere = true;
-            }
             sb.append("order by ad.id desc");
         }
 
