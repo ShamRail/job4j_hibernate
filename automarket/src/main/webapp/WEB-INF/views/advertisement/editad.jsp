@@ -17,6 +17,7 @@
             setSelectedUsedOption();
             setSelectedTransmissionOption();
             setSelectedBodyOption();
+            setSelectedStatusOption();
         });
 
         function setCurrentDateTime() {
@@ -33,7 +34,11 @@
         }
 
         function setSelectedBodyOption() {
-            $("#body").val('${ad.car.body}');
+            $("#body").val("${ad.car.body}");
+        }
+
+        function setSelectedStatusOption() {
+            $("#body").val('${ad.status}');
         }
 
     </script>
@@ -80,13 +85,20 @@
                 <div id="ad-attr">
 
                     <input type="hidden" name="id" value="${ad.id}"/>
-                    <input type="hidden" name="photoPath" value="${ad.photoPath}"/>
+                    <input type="hidden" name="photoPath" value="${photoPath}"/>
 
                     <label for="title">Title:</label>
                     <input id="title" name="title" type="text" value="${ad.title}"/>
 
                     <label for="description">Description:</label>
                     <input id="description" name="description" type="text" value="${ad.description}"/>
+
+                    <label for="status">Status:</label>
+                    <select id="status" name="status">
+                        <option value="true">Free</option>
+                        <option value="false">Sold</option>
+                    </select>
+
 
                     <label for="date">Date:</label>
                     <p id="date-text"></p>

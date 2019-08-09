@@ -10,43 +10,59 @@
             flex: 1;
         }
 
+
         #add-btn-div {
             display: flex;
             justify-content: center;
             width: 100%;
             height: 50px;
+
+
         }
 
         #add-btn {
             flex: 1;
-            background-color: #FFA500;
-            border: none;
-            color: white;
+            background-color: white;
+            color: black;
+
+            border-style: solid;
+            border-width: thin;
+            border-color: black;
         }
         #add-btn:hover {
-            background-color: #FF6F00;
+            border-color: red;
         }
 
         .edit-btn {
-            background-color: lightgreen;
-            border: none;
+            background-color: white;
             height: 50px;
+
+            border-style: solid;
+            border-width: thin;
+            border-color: black;
+
         }
 
         .edit-btn:hover {
-            background-color: greenyellow;
-            border: none;
+            background-color: white;
+            border-color: red;
         }
 
         .del-btn {
-            background-color: lightcoral;
-            border: none;
+            background-color: white;
             height: 50px;
+
+            border-style: solid;
+            border-width: thin;
+            border-color: black;
+
         }
         .del-btn:hover {
-            background-color: coral;
-            border: none;
+            background-color: white;
+            border-color: red;
         }
+
+        /**/
 
 
     </style>
@@ -59,8 +75,7 @@
 
         <%@include file="/resources/js/sample.js"%>
 
-        function showAd(event) {
-            var id = event.getAttribute("id");
+        function showAd(id) {
             window.location.replace("/automarket/get-ad?id=" + id);
         }
 
@@ -99,7 +114,17 @@
 <body>
 
 <header>
-
+    <form id="aouth-btns">
+        <c:if test="${id == -1}">
+            <button type='submit' id='signin-btn' formmethod='get' formaction='/automarket/signup'>Sign up</button>
+            <button type='submit' id='signup-btn' formmethod='get' formaction='/automarket/signin'>Sign in</button>
+        </c:if>
+        <c:if test="${id != -1}">
+            <input type="hidden" name="id" value="${id}"/>
+            <button type='submit' id='signin-btn' formmethod='get' formaction="/automarket/edit-user">Profile</button>
+            <button type='submit' id='signup-btn' formmethod='post' formaction='/automarket/signout'>Sign out</button>
+        </c:if>
+    </form>
 </header>
 <main>
 
@@ -155,7 +180,7 @@
 
             <c:forEach var="ad" items="${ads}">
                 <div id="item-${ad.id}" class="item">
-                    <div class="img-box" onclick="showAd(this);">
+                    <div class="img-box" onclick="showAd('${ad.id}');">
                         <c:if test="${ad.photoPath != null}">
                             <img src="${pageContext.request.contextPath}/get-image?path=${ad.photoPath}" alt="car"/>
                         </c:if>
@@ -164,10 +189,10 @@
                         </c:if>
                     </div>
                     <div class="item-info">
-                        <div class="dv-name" onclick="showAd(this);">
+                        <div class="dv-name" onclick="showAd('${ad.id}');">
                             <h3>${ad.title}</h3>
                         </div>
-                        <div class="dv-description" onclick="showAd(this);">
+                        <div class="dv-description" onclick="showAd('${ad.id}');">
                             <div class="field">
                                 <p class="inf-key">Date: </p>
                                 <p class="inf-value">${ad.date}</p>
@@ -185,7 +210,7 @@
                                 <p class="inf-value">${ad.car.manufactureYear}</p>
                             </div>
                         </div>
-                        <div class="dv-status" onclick="showAd(this);">
+                        <div class="dv-status" onclick="showAd('${ad.id}');">
                             <c:if test="${ad.status == true}">
                                 <p>
                                     <br>
@@ -221,7 +246,7 @@
         </div>
 
         <div style="display: flex; margin-top: 20px;" id="rmv-btn-div">
-            <button style="flex: 1; background-color: red" class="del-btn" onclick="removeAccount()">Remove account</button>
+            <button style="flex: 1; background-color: white; border-style: solid; border-width: thin;" class="del-btn" onclick="removeAccount()">Remove account</button>
         </div>
 
     </div>

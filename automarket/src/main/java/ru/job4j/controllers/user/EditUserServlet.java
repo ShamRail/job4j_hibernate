@@ -29,6 +29,7 @@ public class EditUserServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         User user = LOGIC.getById(id);
         user.setPhotoPath(Encoder.encode(user.getPhotoPath()));
+        req.setAttribute("id", id);
         req.setAttribute("user", user);
         req.setAttribute("ads", encode(user.getAds()));
         req.getRequestDispatcher("/WEB-INF/views/user/profileedit.jsp").forward(req, resp);

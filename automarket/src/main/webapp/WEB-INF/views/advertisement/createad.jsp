@@ -103,7 +103,7 @@
                 <label for="body">Body:</label>
                 <select id="body" name="body">
                     <option value="Hatchback">Hatchback</option>
-                    <option value="Sedan" selected>Sedan</option>
+                    <option value="Sedan">Sedan</option>
                     <option value="MPV">MPV</option>
                     <option value="SUV">SUV</option>
                     <option value="Crossover">Crossover</option>

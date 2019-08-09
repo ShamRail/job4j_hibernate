@@ -27,6 +27,7 @@ public class EditAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Advertisement ad = LOGIC.getById(id);
+        req.setAttribute("photoPath", ad.getPhotoPath());
         ad.setPhotoPath(Encoder.encode(ad.getPhotoPath()));
         req.setAttribute("ad", ad);
         req.setAttribute("id", req.getSession().getAttribute("id"));
@@ -67,7 +68,7 @@ public class EditAdServlet extends HttpServlet {
         old.setDescription(req.getParameter("description"));
         old.setDate(new Timestamp(Long.parseLong(req.getParameter("date"))));
         old.setPrice(Integer.parseInt(req.getParameter("price")));
-        old.setStatus(true);
+        old.setStatus(Boolean.parseBoolean(req.getParameter("status")));
         return old;
     }
 
