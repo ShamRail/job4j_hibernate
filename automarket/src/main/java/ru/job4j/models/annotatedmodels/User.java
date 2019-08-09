@@ -1,12 +1,15 @@
 package ru.job4j.models.annotatedmodels;
 
+import ru.job4j.models.Unique;
+
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements Unique {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -14,18 +17,20 @@ public class User {
 
     private String name;
 
+    private String password;
+
     private String email;
 
     private String telNumber;
 
     private String photoPath;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany (mappedBy = "user")
-    private Set<Advertisement> ads;
+    @OneToMany (mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Advertisement> ads = new LinkedHashSet<>();
 
     public User() {
 
@@ -89,6 +94,14 @@ public class User {
 
     public void setAds(Set<Advertisement> ads) {
         this.ads = ads;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

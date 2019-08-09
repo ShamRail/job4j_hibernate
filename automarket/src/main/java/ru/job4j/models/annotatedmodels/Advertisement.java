@@ -1,12 +1,13 @@
 package ru.job4j.models.annotatedmodels;
 
+import ru.job4j.models.Unique;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name="ads")
-public class Advertisement {
+public class Advertisement implements Unique {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -20,11 +21,15 @@ public class Advertisement {
 
     private boolean status;
 
-    @ManyToOne
+    private String photoPath;
+
+    private int price;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     private Car car;
 
@@ -88,6 +93,22 @@ public class Advertisement {
         this.user = user;
     }
 
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,6 +125,6 @@ public class Advertisement {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, date, status, user, car);
+        return Objects.hash(id, title, description, date, status);
     }
 }

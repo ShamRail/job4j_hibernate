@@ -11,7 +11,7 @@
         <property name="hibernate.connection.charSet">UTF-8</property>
         <property name="hibernate.connection.characterEncoding">UTF-8</property>
 
-        <property name="hbm2ddl.auto">create</property>
+        <!--<property name="hbm2ddl.auto">create</property>-->
         <!-- List of XML mapping files -->
 
         <!--<mapping resource = "ru.job4j.xmlmappedmodel/User.cfg.xml"/>-->

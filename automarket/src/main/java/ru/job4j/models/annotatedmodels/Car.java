@@ -22,13 +22,13 @@ public class Car {
 
     private boolean used;
 
-    private Timestamp manufactureYear;
+    private long manufactureYear;
 
     private String transmission;
 
     private String body;
 
-    @OneToOne(mappedBy = "car")
+    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Advertisement advertisement;
 
     public Car() {
@@ -83,11 +83,11 @@ public class Car {
         this.used = used;
     }
 
-    public Timestamp getManufactureYear() {
+    public long getManufactureYear() {
         return manufactureYear;
     }
 
-    public void setManufactureYear(Timestamp manufactureYear) {
+    public void setManufactureYear(long manufactureYear) {
         this.manufactureYear = manufactureYear;
     }
 

@@ -16,7 +16,7 @@ public class Role {
 
     private String name;
 
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private Set<User> users = new TreeSet<>(new Comparator<User>() {
         @Override
         public int compare(User o1, User o2) {
