@@ -24,9 +24,12 @@ public class ShowAdsServlet extends HttpServlet {
             session.setAttribute("password", "");
         }
 
-        List<Advertisement> advertisementList = ADVERTISEMENT_LOGIC.read();
+        List<Advertisement> advertisementList = (List<Advertisement>) req.getAttribute("ads");
+        if (advertisementList == null) {
+            advertisementList = ADVERTISEMENT_LOGIC.read();
+            req.setAttribute("ads", advertisementList);
+        }
         req.setAttribute("paths", encode(advertisementList));
-        req.setAttribute("ads", advertisementList);
         req.setAttribute("id", session.getAttribute("id"));
         req.getRequestDispatcher("/WEB-INF/views/advertisement/ads.jsp").forward(req, resp);
     }

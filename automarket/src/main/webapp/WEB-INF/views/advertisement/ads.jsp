@@ -17,6 +17,11 @@
             window.location.replace("/automarket/get-ad?id=" + id);
         }
 
+        function changeState(event) {
+            var prevState = $("#mark").prop("disabled");
+            $("#mark").prop("disabled", !prevState);
+        }
+
     </script>
 </head>
 <body>
@@ -44,9 +49,10 @@
                 <input type="checkbox" name="withPhoto" value="true"> With photo<br>
                 <input type="checkbox" name="free" value="true"> Free<br>
                 <input type="checkbox" name="sort" value="true"> Sort by date<br>
+                <input type="checkbox" name="withMark" value="true" onchange="changeState(this)"> By mark<br>
 
                 <label for="mark">Choose a mark:</label><br>
-                <select id="mark" name="mark">
+                <select id="mark" name="mark" disabled>
                     <option value="BMW">BMW</option>
                     <option value="Audi">Audi</option>
                     <option value="Bently">Bently</option>
