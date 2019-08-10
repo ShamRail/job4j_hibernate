@@ -24,6 +24,6 @@ This project represents basic todo list application
 
 ![image1]( ../projects-images/todolist/image1.png "Image1")
 
-![image2]( ../projects-images/todolist/image1.png "Image2")
+![image2]( ../projects-images/todolist/image2.png "Image2")
 
-![image3]( ../projects-images/todolist/image1.png "Image2")
+![image3]( ../projects-images/todolist/image3.png "Image2")
