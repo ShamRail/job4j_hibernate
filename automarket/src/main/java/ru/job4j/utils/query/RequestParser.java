@@ -36,7 +36,7 @@ public class RequestParser implements QueryParser<HttpServletRequest> {
         }
 
         if (sort != null) {
-            sb.append("order by ad.id desc");
+            sb.append(" order by ad.id desc");
         }
 
         String result = sb.toString();

@@ -44,7 +44,6 @@ public class DBStore implements Store{
         wrap((session, arg) -> {
             Item updated = session.get(Item.class, item.getId());
             updated.setDone(arg.getDone());
-            session.update(arg);
             return null;
         }, item);
     }
