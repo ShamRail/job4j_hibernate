@@ -122,4 +122,18 @@ public class User implements Unique {
     public int hashCode() {
         return Objects.hash(id, name, email, telNumber, photoPath, role, ads);
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", telNumber='" + telNumber + '\'' +
+                ", photoPath='" + photoPath + '\'' +
+                ", role=" + role +
+                ", ads=" + ads +
+                '}';
+    }
 }

@@ -9,6 +9,7 @@ import ru.job4j.utils.HibernateUtil;
 import ru.job4j.utils.TemplateMethod;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 public class UserTest {
 
@@ -19,53 +20,61 @@ public class UserTest {
     @Test
     public void whenAddThenSave() {
         User user = new User(1);
+        user.setName("t1");
         Role role = new Role("admin");
-        User rstl = method.execute((s, u) -> {
+        method.execute((s, u) -> {
             s.save(u);
             s.save(role);
             u.setRole(role);
-            User res = getFirst(s);
-            s.delete(u);
-            return res;
+            return null;
         }, user);
-        Assert.assertThat(rstl, Is.is(user));
+        User rstl = getByName("t1");
+        Assert.assertThat(rstl.getName(), Is.is(user.getName()));
     }
 
     @Test
     public void whenUpdateThenUpdated() {
         User user = new User(1);
-        User rstl = method.execute((s, u) -> {
+        method.execute((s, u) -> {
             s.save(u);
             s.evict(u);
             u.setName("test");
             s.update(user);
-            User res = getFirst(s);
-            s.delete(u);
-            return res;
+            return null;
         }, user);
+        User rstl = getByName("test");
         Assert.assertThat(rstl.getName(), Is.is("test"));
     }
 
     @Test
     public void whenSaveWithAdsThenMustProperlySaved() {
         User user = new User(1);
-        Advertisement advertisement = new Advertisement();
-        advertisement.setTitle("first");
-        User rstl = method.execute((s, u) -> {
-            s.save(advertisement);
+        user.setName("t2");
+        method.execute((s, u) -> {
+            Advertisement a = new Advertisement();
+            a.setTitle("first");
+            s.save(a);
             s.save(u);
             Set<Advertisement> ads = new HashSet<>();
-            ads.add(advertisement);
+            ads.add(a);
             u.setAds(ads);
-            User res = getFirst(s);
-            s.delete(u);
-            return res;
+            a.setUser(u);
+
+            return null;
         }, user);
+        User rstl = getByName("t2");
         Assert.assertThat(rstl.getAds().iterator().next().getTitle(), Is.is("first"));
     }
 
     private User getFirst(Session session) {
         return (User) session.createQuery("from User").list().get(0);
+    }
+
+    private User getByName(String name) {
+        return method.execute((session, o)
+                -> (User) session.createQuery(String.format("from User as u where u.name='%s'", name))
+                .list().iterator().next(), null
+        );
     }
 
 }
