@@ -16,7 +16,9 @@ public class RoleTest {
     @Test
     public void whenRetrieveUserByRoleThenReturnUser() {
         User user1 = new User(1);
+        user1.setName("a");
         User user2 = new User(2);
+        user2.setName("b");
         User[] users = {user1, user2};
         Role role = new Role("user");
         role.setId(1);
@@ -32,7 +34,7 @@ public class RoleTest {
             Role r = (Role) s.createQuery("from Role as r where r.name='user'").list().get(0);
             return r.getUsers().iterator().next();
         }, users);
-        Assert.assertThat(rstl.getId(), Is.is(2));
+        Assert.assertThat(rstl.getName(), Is.is("a"));
     }
 
 }
