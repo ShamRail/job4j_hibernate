@@ -25,7 +25,7 @@ public class AdvertisementTest {
             s.save(c);
             s.save(adv);
             adv.setCar(c);
-            return (Advertisement) s.createQuery("from Advertisement").list().get(0);
+            return (Advertisement) s.createQuery("from Advertisement as a where a.title='audi s7'").list().get(0);
         }, car);
         Assert.assertThat(res.getCar().getMark(), Is.is("Audi"));
     }

@@ -29,7 +29,7 @@ public class RoleTest {
             return null;
         }, users);
         User rstl = method.execute((s, usrs) -> {
-            Role r = (Role) s.createQuery("from Role").list().get(0);
+            Role r = (Role) s.createQuery("from Role as r where r.name='user'").list().get(0);
             return r.getUsers().iterator().next();
         }, users);
         Assert.assertThat(rstl.getId(), Is.is(2));
