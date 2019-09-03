@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import todolist.models.Item;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 public class DBStore implements Store{
@@ -26,7 +27,7 @@ public class DBStore implements Store{
     }
 
     public void create(Item item) {
-        wrap(Session::save, item);
+        wrap((BiConsumer<Session, Item>) Session::save, item);
     }
 
     public List<Item> findAll() {
@@ -41,18 +42,14 @@ public class DBStore implements Store{
     }
 
     public void update(Item item) {
-        wrap((session, arg) -> {
-            Item updated = session.get(Item.class, item.getId());
-            updated.setDone(arg.getDone());
-            return null;
+        wrap((session, item1) -> {
+            Item updated = session.get(Item.class, item1.getId());
+            updated.setDone(item1.getDone());
         }, item);
     }
 
     public void delete(Item item) {
-        wrap((session, arg) -> {
-            session.delete(arg);
-            return null;
-        }, item);
+        wrap((BiConsumer<Session, Item>) Session::delete, item);
     }
 
     private  <T, R> R wrap(BiFunction<Session, T, R> function, T arg) {
@@ -62,6 +59,14 @@ public class DBStore implements Store{
         session.getTransaction().commit();
         session.close();
         return data;
+    }
+
+    private void wrap(BiConsumer<Session, Item> function, Item arg) {
+        Session session = factory.openSession();
+        session.beginTransaction();
+        function.accept(session, arg);
+        session.getTransaction().commit();
+        session.close();
     }
 
 }
