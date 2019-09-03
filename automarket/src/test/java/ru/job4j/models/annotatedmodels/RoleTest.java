@@ -30,11 +30,8 @@ public class RoleTest {
             usrs[1].setRole(role);
             return null;
         }, users);
-        User rstl = method.execute((s, usrs) -> {
-            Role r = (Role) s.createQuery("from Role as r where r.name='user'").list().get(0);
-            return r.getUsers().iterator().next();
-        }, users);
-        Assert.assertThat(rstl.getName(), Is.is("a"));
+        Role rstl = method.execute((s, usrs) -> (Role) s.createQuery("from Role as r where r.name='user'").list().get(0), users);
+        Assert.assertThat(rstl.getUsers().size(), Is.is(2));
     }
 
 }
