@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        <%@include file="/resources/css/signin.css"%>
-    </style>
+
     <title>Sign in</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+
+        <%@include file="/resources/css/login.css"%>
+        <%@include file="/resources/css/signin.css"%>
+
+    </style>
+
 </head>
 
 <body>
@@ -19,25 +30,25 @@
     <div class="sidebar">
 
     </div>
-    <div class="content">
+    <div id="content">
+        <form action="${pageContext.servletContext.contextPath}/signin" method="post">
+        <div class="container">
 
-        <div id="user-info">
-            <form id="sign-form" action="${pageContext.request.contextPath}/signin" method="post">
+            <label for="login"><b>Name</b></label>
+            <input type="text" placeholder="Enter Username" name="login" id="login">
 
-                <label for="name">Name:</label>
-                <input id="name" name="name" type="text" placeholder="Please, enter your name"/>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="password">
 
-                <label for="password">Password:</label>
-                <input id="password" name="password" type="password" placeholder="Please, enter your password"/>
+            <div>
 
-                <div id="btns">
-                    <input type="submit" value="Cancel" id="btn-cncl" form="f"/>
-                    <input type="submit" value="Submit" id="btn-sbmt"/>
-                </div>
+                <button type="submit" id="signinbutton">Sign in</button>
+                <button formaction="${pageContext.request.contextPath}/ads" id="signup-button" formmethod="get">Cancel</button>
 
-            </form>
+            </div>
+
         </div>
-
+        </form>
     </div>
     <div class="sidebar">
 

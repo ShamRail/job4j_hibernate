@@ -8,6 +8,7 @@
     </style>
     <title>Sign up</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <script>
         formId = 'signup-form';
         requestURL = '/automarket/signup';
@@ -38,19 +39,19 @@
 
                 <form id="signup-form" action="${pageContext.request.contextPath}/signup" method="post" enctype="multipart/form-data">
 
-                    <label for="name">Name:</label>
+                    <label for="name"><b>Name:</b></label>
                     <input id="name" name="name" type="text" placeholder="Please, enter your name"/>
 
-                    <label for="password">Passoword:</label>
+                    <label for="password"><b>Password:</b></label>
                     <input id="password" name="password" type="password" placeholder="Please, enter your password"/>
 
-                    <label for="email">Email:</label>
+                    <label for="email"><b>Email:</b></label>
                     <input id="email" name="email" type="text" placeholder="Please, enter your email"/>
 
-                    <label for="telnumber">Telnumber:</label>
+                    <label for="telnumber"><b>Telnumber:</b></label>
                     <input id="telnumber" name="telNumber" type="text" placeholder="Please, enter your telnumber"/>
 
-                    <label for="photo">Photo:</label>
+                    <label for="photo"><b>Photo:</b></label>
                     <input id="photo" type="file" name="photo" placeholder="Please, choose photo for your profile" onchange="previewFile()"/>
 
                     <div id="btns">
